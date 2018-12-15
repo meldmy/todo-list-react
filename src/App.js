@@ -1,28 +1,52 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Task from './Task/Task.js'
+import './App.css'
 
 class App extends Component {
-  render() {
+  state = {
+    tasks: [
+      {id: 't1', description: 'Buy paint'},
+      {id: 't2', description: 'Buy profiles'},
+      {id: 't3', description: 'Buy plaster boards'}
+    ],
+    showTasks: false
+  }
+
+  toggleTasksHandler = () => {
+    const shouldShow = this.state.showTasks
+    this.setState({showTasks: !shouldShow})
+  }
+
+  render () {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
+    let activeTasks = null
+
+    if (this.state.showTasks) {
+      activeTasks = (
+        <div>
+          {this.state.tasks.map((task) => {
+            return <Task
+              description={task.description}/>
+          })}
+        </div>
+      )
+    }
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Hi dude!</h1>
+        <button style={style} onClick={this.toggleTasksHandler}>Show tasks</button>
+        {activeTasks}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
