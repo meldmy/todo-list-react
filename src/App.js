@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Task from './Task/Task.js'
+import ChangeTaskForm from './ChangeForm/ChangeTaskForm.js'
 import './App.css'
 
 class App extends Component {
@@ -9,12 +10,17 @@ class App extends Component {
       {id: 't2', description: 'Buy profiles'},
       {id: 't3', description: 'Buy plaster boards'}
     ],
+    activeTaskToChange: '',
     showTasks: false
   }
 
   toggleTasksHandler = () => {
     const shouldShow = this.state.showTasks
     this.setState({showTasks: !shouldShow})
+  }
+
+  handleChangeTaskForm = (changedTaskDescription) => {
+    this.setState({activeTaskToChange: changedTaskDescription})
   }
 
   render () {
@@ -44,6 +50,8 @@ class App extends Component {
         <h1>Hi dude!</h1>
         <button style={style} onClick={this.toggleTasksHandler}>Show tasks</button>
         {activeTasks}
+        <ChangeTaskForm activeTaskToChange={this.handleChangeTaskForm}/>
+        <div><p>Child value passed to parent:</p> <b>{this.state.activeTaskToChange}</b></div>
       </div>
     )
   }
