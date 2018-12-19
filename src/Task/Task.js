@@ -1,12 +1,15 @@
 import React from 'react'
 import './Task.css'
 
-const task = ( props ) => {
+const task = (props) => {
   return (
     <div className="Task">
-      <p>{props.description}</p>
+        <tr>
+          <td>{props.description}</td>
+          <td><button onClick={props.click}>Remove</button></td>
+        </tr>
     </div>
   )
 }
 
-export default task;
+export default task

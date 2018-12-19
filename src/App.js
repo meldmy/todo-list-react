@@ -6,9 +6,9 @@ import './App.css'
 class App extends Component {
   state = {
     tasks: [
-      {id: 't1', description: 'Buy paint'},
-      {id: 't2', description: 'Buy profiles'},
-      {id: 't3', description: 'Buy plaster boards'}
+      {key: 't1', id: 't1', description: 'Buy paint'},
+      {key: 't2', id: 't2', description: 'Buy profiles'},
+      {key: 't3', id: 't3', description: 'Buy plaster boards'}
     ],
     activeTaskToChange: '',
     showTasks: false
@@ -21,6 +21,12 @@ class App extends Component {
 
   handleChangeTaskForm = (changedTaskDescription) => {
     this.setState({activeTaskToChange: changedTaskDescription})
+  }
+
+  deleteTaskHandler = (taskIndex) => {
+    const tasks = [...this.state.tasks]
+    tasks.splice(taskIndex, 1)
+    this.setState({tasks: tasks})
   }
 
   render () {
@@ -38,11 +44,15 @@ class App extends Component {
     if (this.state.showTasks) {
       activeTasks = (
         <div>
-          {this.state.tasks.map((task) => {
+          <table align="center" >
+          {this.state.tasks.map((task, index) => {
             return <Task
-              description={task.description}/>
+              description={task.description}
+              click={() => this.deleteTaskHandler(index)}/>
           })}
+        </table>
         </div>
+        
       )
       style.backgroundColor = 'red'
       style.color = 'black'
@@ -50,7 +60,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Hi dude!</h1>
+        <h1>Hi! {this.state.tasks.length} tasks are open</h1>
         <button style={style} onClick={this.toggleTasksHandler}>Show tasks</button>
         <p/>
         {activeTasks}
