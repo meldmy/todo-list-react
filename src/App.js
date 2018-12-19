@@ -25,7 +25,8 @@ class App extends Component {
 
   render () {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -43,12 +44,15 @@ class App extends Component {
           })}
         </div>
       )
+      style.backgroundColor = 'red'
+      style.color = 'black'
     }
 
     return (
       <div className="App">
         <h1>Hi dude!</h1>
         <button style={style} onClick={this.toggleTasksHandler}>Show tasks</button>
+        <p/>
         {activeTasks}
         <ChangeTaskForm activeTaskToChange={this.handleChangeTaskForm}/>
         <div><p>Child value passed to parent:</p> <b>{this.state.activeTaskToChange}</b></div>
